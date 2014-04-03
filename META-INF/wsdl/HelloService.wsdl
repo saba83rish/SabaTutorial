@@ -1,0 +1,79 @@
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://webservice.tutorial.saba.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HelloService" targetNamespace="http://webservice.tutorial.saba.com/">
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://webservice.tutorial.saba.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://webservice.tutorial.saba.com/" version="1.0">
+      <xs:element name="sayBye" type="tns:sayBye"></xs:element>
+      <xs:element name="sayByeResponse" type="tns:sayByeResponse"></xs:element>
+      <xs:element name="sayHello" type="tns:sayHello"></xs:element>
+      <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"></xs:element>
+      <xs:complexType name="sayHello">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"></xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sayHelloResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"></xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sayBye">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"></xs:element>
+          <xs:element minOccurs="0" name="arg1" type="xs:dateTime"></xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="sayByeResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="xs:string"></xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="sayByeResponse">
+    <wsdl:part element="tns:sayByeResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayBye">
+    <wsdl:part element="tns:sayBye" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayHelloResponse">
+    <wsdl:part element="tns:sayHelloResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayHello">
+    <wsdl:part element="tns:sayHello" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HelloInterface">
+    <wsdl:operation name="sayHello">
+      <wsdl:input message="tns:sayHello" name="sayHello"></wsdl:input>
+      <wsdl:output message="tns:sayHelloResponse" name="sayHelloResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sayBye">
+      <wsdl:input message="tns:sayBye" name="sayBye"></wsdl:input>
+      <wsdl:output message="tns:sayByeResponse" name="sayByeResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HelloServiceSoapBinding" type="tns:HelloInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"></soap:binding>
+    <wsdl:operation name="sayHello">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="sayHello">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="sayHelloResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sayBye">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="sayBye">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="sayByeResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HelloService">
+    <wsdl:port binding="tns:HelloServiceSoapBinding" name="Hello">
+      <soap:address location="http://localhost:8080/SabaTutorial/Hello"></soap:address>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
